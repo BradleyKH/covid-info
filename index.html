@@ -1829,11 +1829,17 @@
                     
                     // Use setTimeout to ensure all content changes and transitions complete
                     setTimeout(() => {
-                        const headerPosition = header.offsetTop - offset;
-                        window.scrollTo({
-                            top: headerPosition,
-                            behavior: "smooth"
-                        });
+                        const headerRect = header.getBoundingClientRect();
+                        const isHeaderVisible = headerRect.top >= navHeight + 20 && headerRect.bottom <= window.innerHeight;
+                        
+                        // Only scroll if the header is not visible or would be hidden behind sticky nav
+                        if (!isHeaderVisible || headerRect.top < navHeight + 20) {
+                            const headerPosition = header.offsetTop - offset;
+                            window.scrollTo({
+                                top: headerPosition,
+                                behavior: "smooth"
+                            });
+                        }
                     }, 350);
                 }
             }
