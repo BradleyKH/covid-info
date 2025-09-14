@@ -1809,13 +1809,13 @@
                 const isActive = content.classList.contains("active");
 
                 // Close ALL questions across the entire document
-                const allQuestions = document.querySelectorAll(".question-content");
-                const allIcons = document.querySelectorAll(".question-icon");
-                const allHeaders = document.querySelectorAll(".question-header");
+                // const allQuestions = document.querySelectorAll(".question-content");
+                // const allIcons = document.querySelectorAll(".question-icon");
+                // const allHeaders = document.querySelectorAll(".question-header");
 
-                allQuestions.forEach((q) => q.classList.remove("active"));
-                allIcons.forEach((i) => (i.textContent = "+"));
-                allHeaders.forEach((h) => h.setAttribute("aria-expanded", "false"));
+                // allQuestions.forEach((q) => q.classList.remove("active"));
+                // allIcons.forEach((i) => (i.textContent = "+"));
+                // allHeaders.forEach((h) => h.setAttribute("aria-expanded", "false"));
 
                 // Toggle current question
                 if (!isActive) {
@@ -1824,24 +1824,29 @@
                     header.setAttribute("aria-expanded", "true");
                     
                     // Scroll to keep the question header visible with offset for sticky nav
-                    const navHeight = document.querySelector('.nav-container').offsetHeight;
-                    const offset = navHeight + 20; // Add 20px extra spacing
+                    // const navHeight = document.querySelector('.nav-container').offsetHeight;
+                    // const offset = navHeight + 20; // Add 20px extra spacing
                     
                     // Use setTimeout to ensure all content changes and transitions complete
-                    setTimeout(() => {
-                        const headerRect = header.getBoundingClientRect();
-                        const isHeaderVisible = headerRect.top >= navHeight + 20 && headerRect.bottom <= window.innerHeight;
+                    // setTimeout(() => {
+                    //     const headerRect = header.getBoundingClientRect();
+                    //     const isHeaderVisible = headerRect.top >= navHeight + 20 && headerRect.bottom <= window.innerHeight;
                         
-                        // Only scroll if the header is not visible or would be hidden behind sticky nav
-                        if (!isHeaderVisible || headerRect.top < navHeight + 20) {
-                            const headerPosition = header.offsetTop - offset;
-                            window.scrollTo({
-                                top: headerPosition,
-                                behavior: "smooth"
-                            });
-                        }
-                    }, 350);
+                    //     // Only scroll if the header is not visible or would be hidden behind sticky nav
+                    //     if (!isHeaderVisible || headerRect.top < navHeight + 20) {
+                    //         const headerPosition = header.offsetTop - offset;
+                    //         window.scrollTo({
+                    //             top: headerPosition,
+                    //             behavior: "smooth"
+                    //         });
+                    //     }
+                    // }, 350);
+                } else {
+                    content.classList.remove("active");
+                    icon.textContent = "+";
+                    header.setAttribute("aria-expanded", "false");
                 }
+
             }
 
             function handleKeyPress(event, action) {
